@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './TodoList.css'
 import { connect } from 'react-redux'
 import styled from 'styled-components';
 
@@ -7,6 +6,11 @@ import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
 import { loadTodos, removeTodoRequest, completeTodoRequest } from './thunks';
 import { getTodosLoading, getCompletedTodos, getIncompleteTodos } from './selectors';
+
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
 
 const TodoList = ({
                     completedTodos,
@@ -24,7 +28,7 @@ const TodoList = ({
   const loadingMessage = <div>Loading todos...</div>;
 
   const content = (
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewTodoForm/>
       <h3>Incomplete:</h3>
       {incompleteTodos.map(todo =>
@@ -45,7 +49,7 @@ const TodoList = ({
           onComplete={completeTodoRequest}
         />
       )}
-    </div>
+    </ListWrapper>
   )
 
   return isLoading ? loadingMessage : content;
